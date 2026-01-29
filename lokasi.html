@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lokasi | Unit Sumber dan Teknologi Pendidikan</title>
+
+  <!-- TailwindCSS CDN (no build tools) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font (optional) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root { color-scheme: light; }
+    html, body { height: 100%; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+    /* Map marker sizing for tap targets */
+    .pin-hit { width: 44px; height: 44px; }
+
+    /* Simple focus outline for keyboard users */
+    .focus-ring:focus { outline: 3px solid rgba(59,130,246,.65); outline-offset: 3px; }
+
+    /* Hide scrollbar in card strip while still scrollable */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+  <!-- Header -->
+  <header class="bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between py-4">
+        <a href="/index.html" class="flex items-center gap-3 focus-ring rounded-lg">
+          <div class="flex items-center gap-2">
+            <!-- Logo 1: placeholder (KPM/JPN/PPD) -->
+            <div class="h-10 w-10 rounded-lg bg-slate-100 border border-slate-200 grid place-items-center text-[10px] text-slate-500">
+              <img
+                src="https://lh3.googleusercontent.com/sitesv/APaQ0SRGyVR9QRh2NgBkhL8Da3NaJs3eirhiE2LankkM8tfCR2geLhn5eylF7rWAIOsffjCWTw5LvqAaIyz1oA0yAT0QJOaGcjub4yiyZOtJuHl5kJf8J3XZ6a7xQlEBBCOYOQiHyt4HWtcoThlYjQCF_b0rjV-D_g3wFlTCueGCgrCBUfXgmXSxPxap4eI9yg-bAZmIs7FX-WtNdv31-Jxqf5oj49LqRWUJqxen=w1280"
+                alt="Logo USTP"
+                class="h-full w-full object-cover"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+              />
+            </div>
+
+            <!-- Logo 2: USTP logo -->
+            <div class="h-10 w-10 rounded-lg bg-white border border-slate-200 overflow-hidden">
+              <img
+                src="https://lh3.googleusercontent.com/sitesv/APaQ0ST8Z1F4Gdov5D2eNyQoruhcPD3wilJEOR0e7ffo5I7b1xW3Bxe_u7TkGgxIfCCnTKlJD7aG4QAhxpr4RcgZPz28QWE9m6U3pEr0uBL-S38efnnzzgowPE8uKsqfYG9SZKf0ZbBvHnF9Bq7Dw8Jgk-d_3jFArVHzh9z2jj0k_697ZeIazkb6QlUc=w1280"
+                alt="Logo USTP"
+                class="h-full w-full object-cover"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+              />
+            </div>
+          </div>
+
+          <div class="leading-tight">
+            <p class="text-sm font-semibold">Unit Sumber dan Teknologi Pendidikan</p>
+            <p class="text-xs text-slate-600">Pejabat Pendidikan Daerah Pasir Mas</p>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-1">
+          <a class="px-3 py-2 rounded-lg text-sm hover:bg-slate-100" href="/index.html">Utama</a>
+          <a class="px-3 py-2 rounded-lg text-sm bg-slate-900 text-white" href="/location.html">Lokasi</a>
+          <a class="px-3 py-2 rounded-lg text-sm hover:bg-slate-100" href="/about.html">Kenali Kami</a>
+          <a class="px-3 py-2 rounded-lg text-sm hover:bg-slate-100" href="/functions.html">Fungsi Kami</a>
+          <a class="px-3 py-2 rounded-lg text-sm hover:bg-slate-100" href="/contact.html">Hubungi Kami</a>
+        </nav>
+
+        <button id="menuBtn" class="md:hidden focus-ring rounded-lg p-2 border border-slate-200 bg-white" aria-expanded="false" aria-controls="mobileMenu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <div id="mobileMenu" class="md:hidden hidden pb-4">
+        <div class="grid gap-2">
+          <a class="px-3 py-2 rounded-lg text-sm hover:bg-slate-100" href="/index.html">Utama</a>
+          <a class="px-3 py-2 rounded-lg text-sm bg-slate-900 text-white" href="/location.html">Lokasi</a>
+          <a class="px-3 py-2 rounded-lg text-sm hover:bg-slate-100" href="/about.html">Kenali Kami</a>
+          <a class="px-3 py-2 rounded-lg text-sm hover:bg-slate-100" href="/functions.html">Fungsi Kami</a>
+          <a class="px-3 py-2 rounded-lg text-sm hover:bg-slate-100" href="/contact.html">Hubungi Kami</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page header -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">Lokasi PKG Pasir Mas</h1>
+        <p class="text-slate-600 mt-1">Pilih pin pada peta untuk lihat ringkasan PKG, Pegawai, dan senarai sekolah (dibuka jika perlu).</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <label for="pkgSelect" class="text-sm text-slate-600">Pilih PKG</label>
+        <select id="pkgSelect" class="focus-ring rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"></select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main layout -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 pb-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Map area -->
+      <section class="lg:col-span-8">
+        <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+          <div class="relative" style="aspect-ratio: 16/9;">
+            <img
+              src="https://lh3.googleusercontent.com/sitesv/APaQ0SQe28L8Mv6aLhJSmXVD4FXeEtUHeFun53AcPnZRR4nSkyDdZBtQaUPP3VmhLCS7i6c0MjlUu5DBJ7emHkbi63FrS0PReRRU-HYuN9S1S4wpCVfKmaZdeNo7dUuGEbOwwkNkKCfcl0OWt96T7Gm9_NiMVrt5DOVemMdxqCB2VgVFPjkWhoWMDb5aF2JcJNg2hBzLXB3fBrjIlQ2g30hmrWnzvU2Tbjmx2eBu=w1280"
+              alt="Peta Daerah Pasir Mas"
+              class="absolute inset-0 h-full w-full object-cover"
+              onerror="this.style.display='none'; document.getElementById('mapFallback').classList.remove('hidden');"
+              referrerpolicy="no-referrer"
+            />
+
+            <div id="mapFallback" class="hidden absolute inset-0 grid place-items-center bg-slate-100">
+              <div class="text-center px-6">
+                <p class="font-semibold">Peta belum dipaparkan</p>
+                <p class="text-sm text-slate-600 mt-1">Sila semak pautan imej peta atau kebenaran akses.</p>
+              </div>
+            </div>
+
+            <div id="pinsLayer" class="absolute inset-0"></div>
+          </div>
+
+          <!-- Mobile quick card strip -->
+          <div class="lg:hidden border-t border-slate-200 p-3">
+            <div class="flex items-center justify-between">
+              <p class="text-sm font-semibold">Senarai ringkas</p>
+              <button id="openSheetBtn" class="text-sm font-semibold text-blue-700 hover:text-blue-800 focus-ring rounded">Buka butiran</button>
+            </div>
+            <div id="cardStrip" class="mt-3 flex gap-3 overflow-x-auto no-scrollbar pb-1"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Desktop info panel -->
+      <aside class="hidden lg:block lg:col-span-4">
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm sticky top-24">
+          <div class="p-5 border-b border-slate-200">
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Pusat Kegiatan Guru</p>
+            <h2 id="panelTitle" class="mt-1 text-xl font-bold">Sila pilih PKG</h2>
+            <p id="panelSubtitle" class="mt-1 text-sm text-slate-600">Klik pin pada peta untuk papar maklumat.</p>
+          </div>
+
+          <div class="p-5 space-y-4">
+            
+
+        
+            <div class="group rounded-2xl border border-slate-200 bg-slate-50/60 p-3">
+              
+                <p class="text-sm font-semibold">Pegawai Bertanggungjawab</p>
+         
+             
+              <div class="mt-2 text-sm text-slate-700">
+                <p id="panelPIC"></p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="h-16 w-16 rounded-2xl bg-slate-100 border border-slate-200 overflow-hidden flex-shrink-0">
+                <img id="panelPhoto" alt="Foto PKG" class="h-full w-full object-cover" />
+              </div>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold">Perkhidmatan</p>
+                <ul id="panelServices" class="mt-1 text-sm text-slate-700 list-disc pl-4"></ul>
+              </div>
+            </div>
+			
+            <!-- Address with Google Maps icon -->
+            <div>
+              <p class="text-sm font-semibold">Alamat</p>
+              <div class="mt-1 flex items-start gap-2">
+                <p id="panelAddress" class="text-sm text-slate-700"></p>
+                <a
+                  id="panelMapsIcon"
+                  target="_blank"
+                  rel="noopener"
+                  title="Google Map"
+                  class="focus-ring mt-0.5 inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white p-1.5 hover:bg-slate-50"
+                  href="#"
+                  aria-label="Google Map"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 0 1 18 0Z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </a>
+              </div>
+            </div>
+			
+			
+            <!-- Schools (collapsed) -->
+            <details class="group rounded-2xl border border-slate-200 bg-slate-50/60 p-3">
+              <summary class="cursor-pointer list-none flex items-center justify-between gap-3">
+                <span class="text-sm font-semibold">Senarai Sekolah <span id="panelSchoolsCount" class="text-slate-500 font-semibold"></span></span>
+                <span class="text-xs text-slate-500 group-open:hidden">Buka</span>
+                <span class="text-xs text-slate-500 hidden group-open:inline">Tutup</span>
+              </summary>
+              <ul id="panelSchools" class="mt-2 text-sm text-slate-700 list-disc pl-4 space-y-1"></ul>
+            </details>
+
+            <p class="text-xs text-slate-500">Nota: Senarai sekolah dipaparkan secara ringkas di halaman ini.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Sheet -->
+  <div id="sheetOverlay" class="fixed inset-0 bg-slate-900/40 hidden" aria-hidden="true"></div>
+  <section id="bottomSheet" class="fixed inset-x-0 bottom-0 translate-y-full transition-transform duration-200 lg:hidden" aria-hidden="true">
+    <div class="mx-auto max-w-md">
+      <div class="bg-white rounded-t-3xl shadow-2xl border border-slate-200">
+        <div class="p-4 border-b border-slate-200">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Butiran PKG</p>
+              <h2 id="sheetTitle" class="mt-1 text-lg font-bold">Sila pilih PKG</h2>
+              <p id="sheetSubtitle" class="mt-1 text-sm text-slate-600">Tap pin pada peta untuk papar maklumat.</p>
+            </div>
+            <button id="closeSheetBtn" class="focus-ring rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold">Tutup</button>
+          </div>
+        </div>
+
+        <div class="p-4 space-y-4 max-h-[65vh] overflow-y-auto">
+          <div class="flex items-start gap-4">
+            <div class="h-16 w-16 rounded-2xl bg-slate-100 border border-slate-200 overflow-hidden flex-shrink-0">
+              <img id="sheetPhoto" alt="Foto PKG" class="h-full w-full object-cover" />
+            </div>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold">Perkhidmatan</p>
+              <ul id="sheetServices" class="mt-1 text-sm text-slate-700 list-disc pl-4"></ul>
+            </div>
+          </div>
+
+          <div class="group rounded-2xl border border-slate-200 bg-slate-50/60 p-3">
+                <p class="text-sm font-semibold">Pegawai Bertanggungjawab</p>
+            <div class="mt-2 text-sm text-slate-700">
+                <p id="sheetPIC"></p>
+            </div>
+          </div>
+          
+
+          <!-- Address with Google Maps icon -->
+          <div>
+            <p class="text-sm font-semibold">Alamat</p>
+            <div class="mt-1 flex items-start gap-2">
+              <p id="sheetAddress" class="text-sm text-slate-700"></p>
+              <a
+                id="sheetMapsIcon"
+                target="_blank"
+                rel="noopener"
+                title="Google Map"
+                class="focus-ring mt-0.5 inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white p-1.5 hover:bg-slate-50"
+                href="#"
+                aria-label="Google Map"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 0 1 18 0Z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Schools (collapsed) -->
+          <details class="group rounded-2xl border border-slate-200 bg-slate-50/60 p-3">
+            <summary class="cursor-pointer list-none flex items-center justify-between gap-3">
+              <span class="text-sm font-semibold">Senarai Sekolah <span id="sheetSchoolsCount" class="text-slate-500 font-semibold"></span></span>
+              <span class="text-xs text-slate-500 group-open:hidden">Buka</span>
+              <span class="text-xs text-slate-500 hidden group-open:inline">Tutup</span>
+            </summary>
+            <ul id="sheetSchools" class="mt-2 text-sm text-slate-700 list-disc pl-4 space-y-1"></ul>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-sm text-slate-600">
+      <p>Hak cipta © <span id="year"></span> Unit Sumber dan Teknologi Pendidikan, PPD Pasir Mas.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ----------------------------
+    // Data: PKG list
+    // Pin positions are percentage offsets relative to the map image.
+    // ----------------------------
+
+    const PKGS = [
+      {
+        id: "pkg-rantau-panjang",
+        name: "PKG Rantau Panjang",
+        photo: "https://lh3.googleusercontent.com/sitesv/APaQ0SQNo2Dr8ZtBsK9Z0EKlcMckO4L_XwPNChf032LvSVcg8nEjeETN8h2dI8_4tXYot-mdf8WopLU3NLqPOXgLOmlWrOEeqK4YKE0MFNcDQD22nn6hFUjuhWVFBrg8IFmb8VyY7sRiAB_ptNgXskgE96E83HkA1f1_aJWPYRsZ3PbYS4Uqi7uenaE0Lcg=w1280",
+        picName: "Mohd Fauzi bin Yunus",
+        services: ["Bimbingan PSS", "", "Tempahan Premis"],
+        address: "d/a SK Rantau Panjang, Pasir Mas, Kelantan",
+        mapsUrl: "https://www.google.com/maps?q=PKG+Rantau+Panjang+Pasir+Mas",
+		schools: ["SJK (C) Khay Boon","SK Baroh Pial","SK Gual Periok","SK Gual Sitok","SK Gual Tinggi","SK Gual To' Deh","SK Kok Pauh","SK Kubang Kuau","SK Lubok Setol","SK Rahmat","SK Rantau Panjang","SK Sri Rantau Panjang (1)","SK Sri Rantau Panjang (2)","SMK Baroh Pial","SMK Gual Periok","SMK Rantau Panjang"],   
+        pin: { left: 29.95, top: 45.50 }
+      },
+      {
+        id: "pkg-kedai-tanjong",
+        name: "PKG Kedai Tanjong",
+        photo: "https://lh3.googleusercontent.com/sitesv/APaQ0SSRnxQSCfzp8qKVaR1Q6omDaTFa6Ef7IF4AyBzEL3W8JM7BC2FaLfqxLi7LpiE6mLeEO5RxtaDAB0stewx_701A_8-05VVicSzINaaaz6QNTVb0g02qMGoajpRFFeuqVfWa22MsLTpcAajEc7BOa2G4qVpD3BvjmDv-lmXYB2tmsKLafoVze2Pl=w1280",
+        picName: "Roswadi bin Yusof",
+        services: ["Bimbingan Pusat Sumber Digital", "Sokongan rakaman & media", "Tempahan Premis"],
+        address: "d/a SK Pangkal Kala, Pasir Mas, Kelantan",
+        mapsUrl: "https://www.google.com/maps?q=PKG+Kedai+Tanjong+Pasir+Mas",
+		schools: ["SK Bakong","SK Banggol Chicha","SK Bayu Lalang","SK Gelang Mas","SK Kampong Baru","SK Kedai Tanjong","SK Lati","SK Meranti","SK Pangkal Kala","SK Pendidikan Khas Kelantan","SK Sri Kiambang","SK Sultan Ibrahim (1)","SK Sultan Ibrahim (3)","SK Tok Sangkut","SMK (A) Lati","SMK Kampung Dangar","SMK Kedondong","SMK Kubang Bemban","SMK Meranti","SMK Sri Kiambang","SMK Sultan Ibrahim (1)","SMK Tengku Panglima Raja","SMU (A) Al-Falah Siram","SMU (A) Diniah"], 
+        pin: { left: 58.29, top: 19.16 }
+      },
+      {
+        id: "pkg-mekasar",
+        name: "PKG Mekasar",
+        photo: "https://lh3.googleusercontent.com/sitesv/APaQ0SRMmHy3PUJ3w4gbb5Sb4b-VgE8AOwDndEbKTCJJkNn_qK89cuIAs_Kp5yFDpe_PmwJRbGuQ7XWNOllnn4reSARiXMnLyeKAQzKuOiueXMQf_Wi9jnZI0inESVRdvd2SfNNPJM2qv2ofmNg30pR5Hkc7tqtarAEhUlzgOb0hTm8qOoSe1uDXxuSn=w1280",
+        picName: "Mohd Fadhlur Rahman b Pauzi",
+        services: ["Studio Rakaman", "Tempahan Premis", "Khidmat sokongan DELIMa", "Sokongan TVPSS"],
+        address: "d/a SK Mekasar, Pasir Mas, Kelantan",
+        mapsUrl: "https://www.google.com/maps?q=PKG+Mekasar+Pasir+Mas",
+		schools: ["Kolej Vokasional Pasir Mas","SJK (C) Yok Eng","SK Bechah Durian","SK Bunut Susu","SK Dato' Abdul Hamid (1)","SK Dato' Abdul Hamid (2)","SK Kedondong","SK Lemal","SK Mekasar","SK Othman Talib (1)","SK Othman Talib (2)","SK Penggu","SK Sultan Ibrahim (2)","SK Sultan Ibrahim (4)","SK Tanjong Bunga","SK Tanjong Chenak","SMK Bunut Susu","SMK Pasir Mas","SMK Sultan Ibrahim (2)","SMK Tanjong Bunga","SMK Tendong","SMU (A) Al-Ulum"],    
+        pin: { left: 63.87, top: 37.40 }
+      },
+      {
+        id: "pkg-kangkong",
+        name: "PKG Kangkong",
+        photo: "https://lh3.googleusercontent.com/sitesv/APaQ0SSAgQTM9GKK4lkgjUd2Ka_jdCVrd6YRoanD3FKhpb0QVkvoWan3AyIzsXclfoGcYJ8kdnm_KRd40HkCoO8Fdtti7b24-uGtSkAJuH899aOUaKOeIDY-90Re6PjpEaI0xmBgUWG73QUCFsJq4S1SK-qdn_jQfSJY6jFMpetVfDfsrEHPsqrjfFOfiUU=w1280",
+        picName: "Mohamad Naim bin Mohamed",
+        services: ["Khidmat sokongan DELIMa", "Khidmat sokongan pendigitalan", "Sokongan cetakan dan rekabentuk 3D"],
+        address: "d/a SK Bendang Pauh, Pasir Mas, Kelantan",
+        mapsUrl: "https://www.google.com/maps?q=PKG+Kangkong+Pasir+Mas",
+		schools: ["SJK (C) Poy Hwa","SK Banggol Petai","SK Bechah Kelubi","SK Bendang Pauh","SK Bukit Jarum","SK Bukit Perah","SK Chabang Tiga Chetok","SK Chetok","SK Chicha Tinggi","SK Kangkong","SK Kelar","SK Kepas","SK Kubang Chenok","SK To' Uban","SMK Chetok","SMK Kangkong","SMK To' Uban","SMU (A) Al-Balaghul Mubin","SMU (A) Mardziah Jabo"],    
+        pin: { left: 68.39, top: 67.46 }
+      }
+    ];
+
+    let selectedId = PKGS[0]?.id || null;
+
+    const $ = (id) => document.getElementById(id);
+    const byId = (arr, id) => arr.find(x => x.id === id);
+
+    function setText(el, text) { if (el) el.textContent = text ?? ""; }
+
+    function setList(el, items) {
+      if (!el) return;
+      el.innerHTML = "";
+      (items || []).forEach(t => {
+        const li = document.createElement("li");
+        li.textContent = t;
+        el.appendChild(li);
+      });
+    }
+
+    function setImage(imgEl, src) {
+      if (!imgEl) return;
+      imgEl.src = src || "";
+      imgEl.onerror = () => {
+        imgEl.src =
+          "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2364748b' font-family='Arial' font-size='14'%3EFoto%3C/text%3E%3C/svg%3E";
+      };
+    }
+
+    function selectPKG(id, { openSheet = false } = {}) {
+      const pkg = byId(PKGS, id);
+      if (!pkg) return;
+      selectedId = id;
+
+      const sel = $("pkgSelect");
+      if (sel && sel.value !== id) sel.value = id;
+
+      // Desktop panel
+      setText($("panelTitle"), pkg.name);
+      setText($("panelSubtitle"), "");
+      setImage($("panelPhoto"), pkg.photo);
+      setList($("panelServices"), pkg.services);
+      setText($("panelPIC"), pkg.picName || "");
+      setText($("panelAddress"), pkg.address);
+      $("panelMapsIcon").href = pkg.mapsUrl;
+
+      setText($("panelSchoolsCount"), pkg.schools ? `(${pkg.schools.length})` : "");
+      setList($("panelSchools"), pkg.schools || []);
+
+      // Mobile sheet
+      setText($("sheetTitle"), pkg.name);
+      setText($("sheetSubtitle"), "");
+      setImage($("sheetPhoto"), pkg.photo);
+      setList($("sheetServices"), pkg.services);
+      setText($("sheetPIC"), pkg.picName || "");
+      setText($("sheetAddress"), pkg.address);
+      $("sheetMapsIcon").href = pkg.mapsUrl;
+
+      setText($("sheetSchoolsCount"), pkg.schools ? `(${pkg.schools.length})` : "");
+      setList($("sheetSchools"), pkg.schools || []);
+
+      highlightSelected();
+      if (openSheet) openBottomSheet();
+    }
+
+    function highlightSelected() {
+      document.querySelectorAll("[data-pin]").forEach(btn => {
+        const isActive = btn.getAttribute("data-pin") === selectedId;
+        btn.classList.toggle("ring-4", isActive);
+        btn.classList.toggle("ring-blue-300", isActive);
+        btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+
+      document.querySelectorAll("[data-card]").forEach(card => {
+        const isActive = card.getAttribute("data-card") === selectedId;
+        card.classList.toggle("border-blue-300", isActive);
+        card.classList.toggle("shadow-md", isActive);
+      });
+    }
+
+    function renderPins() {
+      const layer = $("pinsLayer");
+      layer.innerHTML = "";
+
+      PKGS.forEach(pkg => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className =
+          "pin-hit focus-ring absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white border border-slate-200 shadow-sm grid place-items-center hover:bg-slate-50";
+        btn.style.left = pkg.pin.left + "%";
+        btn.style.top = pkg.pin.top + "%";
+        btn.setAttribute("data-pin", pkg.id);
+        btn.setAttribute("aria-label", `Pilih ${pkg.name}`);
+        btn.setAttribute("aria-pressed", "false");
+
+        btn.innerHTML = `
+          <div class="h-10 w-10 rounded-full bg-blue-600 grid place-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 0 1 18 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+        `;
+
+        btn.addEventListener("mouseenter", () => {
+          if (window.matchMedia("(hover:hover)").matches) selectPKG(pkg.id, { openSheet: false });
+        });
+
+        btn.addEventListener("click", () => {
+          const isMobile = window.matchMedia("(max-width: 1023px)").matches;
+          selectPKG(pkg.id, { openSheet: isMobile });
+        });
+
+        layer.appendChild(btn);
+      });
+
+      highlightSelected();
+    }
+
+    function renderCardStrip() {
+      const strip = $("cardStrip");
+      strip.innerHTML = "";
+
+      PKGS.forEach(pkg => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className =
+          "focus-ring text-left min-w-[240px] max-w-[260px] bg-white border border-slate-200 rounded-2xl p-3 shadow-sm";
+        card.setAttribute("data-card", pkg.id);
+
+        card.innerHTML = `
+          <div class="flex items-start gap-3">
+            <div class="h-12 w-12 rounded-xl bg-slate-100 border border-slate-200 overflow-hidden flex-shrink-0">
+              <img src="${pkg.photo}" alt="Foto ${pkg.name}" class="h-full w-full object-cover" onerror="this.style.display='none'" />
+            </div>
+            <div class="min-w-0">
+              <p class="text-sm font-bold leading-snug">${pkg.name}</p>
+              <p class="text-xs text-slate-600 mt-0.5">Tap untuk butiran</p>
+            </div>
+          </div>
+        `;
+
+        card.addEventListener("click", () => selectPKG(pkg.id, { openSheet: true }));
+        strip.appendChild(card);
+      });
+
+      highlightSelected();
+    }
+
+    function renderSelect() {
+      const sel = $("pkgSelect");
+      sel.innerHTML = "";
+      PKGS.forEach(pkg => {
+        const opt = document.createElement("option");
+        opt.value = pkg.id;
+        opt.textContent = pkg.name;
+        sel.appendChild(opt);
+      });
+
+      sel.addEventListener("change", (e) => {
+        const isMobile = window.matchMedia("(max-width: 1023px)").matches;
+        selectPKG(e.target.value, { openSheet: isMobile });
+      });
+    }
+
+    function openBottomSheet() {
+      $("sheetOverlay").classList.remove("hidden");
+      $("bottomSheet").classList.remove("translate-y-full");
+      $("bottomSheet").setAttribute("aria-hidden", "false");
+      $("sheetOverlay").setAttribute("aria-hidden", "false");
+    }
+
+    function closeBottomSheet() {
+      $("sheetOverlay").classList.add("hidden");
+      $("bottomSheet").classList.add("translate-y-full");
+      $("bottomSheet").setAttribute("aria-hidden", "true");
+      $("sheetOverlay").setAttribute("aria-hidden", "true");
+    }
+
+    function setupMenu() {
+      const btn = $("menuBtn");
+      const menu = $("mobileMenu");
+      btn.addEventListener("click", () => {
+        const isOpen = !menu.classList.contains("hidden");
+        menu.classList.toggle("hidden");
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      });
+    }
+
+    (function init() {
+      $("year").textContent = new Date().getFullYear();
+
+      setupMenu();
+      renderSelect();
+      renderPins();
+      renderCardStrip();
+
+      if (selectedId) selectPKG(selectedId);
+
+      $("openSheetBtn").addEventListener("click", openBottomSheet);
+      $("closeSheetBtn").addEventListener("click", closeBottomSheet);
+      $("sheetOverlay").addEventListener("click", closeBottomSheet);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeBottomSheet();
+      });
+    })();
+  </script>
+</body>
+</html>
